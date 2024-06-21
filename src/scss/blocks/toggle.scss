@@ -1,0 +1,22 @@
+.toggle-label {
+  display: block;
+  width: 40px;
+  height: 20px;
+  border-radius: 1.5rem;
+  background-color: red;
+}
+
+.toggle-label::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* + es el hermano siguiente */
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: green;
+}
