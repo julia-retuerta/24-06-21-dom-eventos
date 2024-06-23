@@ -183,3 +183,30 @@ buttonNextElement.addEventListener('click', printClickNext); */
 //
 //
 //
+
+/* - Repite el mismo ejercicio pero esta vez desactiva el botón previous si estás en el primer elemento y el botón next si estás en el último */
+
+/* - Crea un input range con un label, al mover el input range deberá escribir en el label el valor del input range. */
+
+const labelElement = document.getElementById('range-label');
+const inputRangeElement = document.getElementById('slider');
+
+const labelValue = () => {
+  labelElement.textContent = `Valor: ${inputRangeElement.value}`;
+};
+
+inputRangeElement.addEventListener('input', labelValue);
+
+//
+//
+//
+
+/* - Crea una lista de 4 checkbox con el texto que quieras y un botón, al pulsar el botón deberá decirte cuantos checkbox están marcados y cuál es su texto. */
+
+const checkboxButtonElement = document.getElementById('checkbox-button');
+
+const checkboxChecked = () => {
+  checkboxButtonElement.textContent = `Hay x checkbox marcados y son `;
+};
+
+checkboxButtonElement.addEventListener('click', checkboxChecked);
