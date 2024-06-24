@@ -87,6 +87,11 @@ buttonElement.addEventListener('click', printClick);
 
 /* - Crea un h1 con el texto "Soy un título ", al ponerte con el ratón encima del h1, deberá cambiar al texto a "Quita de encima!!!" y al quitarte, deberá volver a poner "Soy un título" */
 
+// También se puede escribir así. Se suele escribir de esta forma cuando no se tiene acceso al elemento
+/* const mouseOverH1 = event => {
+  event.target.textcontent = 'Quita de encima!!!';
+}; */
+
 const h1Element = document.getElementById('title');
 
 const mouseOverH1 = () => {
@@ -106,6 +111,11 @@ h1Element.addEventListener('mouseout', mouseOutH1);
 //
 
 /* - Agrega un evento de cambio de tamaño de ventana y te muestre por consola el tamaño de la ventana. */
+
+// También se puede escribir así:
+/* console.log(
+  `El ancho de la ventana es de  ${event.target.innerWidth} px y el alto es de ${event.target.innerHeight} px`
+); */
 
 const windowSize = () => {
   console.log(`Width: ${window.visualViewport.width} px x height: ${window.visualViewport.height} px`);
@@ -127,6 +137,14 @@ const pressedKey = event => {
 
 window.addEventListener('keydown', pressedKey);
 
+// esto es para que al levantar el dedo de la tecla vuelva a poner 'esperando entrada de teclado'
+
+/* const waitingKeyInfo = () => {
+  pElement.textContent = `esperando entrada de teclado`;
+}; */
+
+// window.addEventListener('keyup', waitingKeyInfo);
+
 //
 //
 //
@@ -141,50 +159,53 @@ const h2Element = document.getElementById('subtitle');
 const buttonPreviousElement = document.getElementById('button-previous');
 const buttonNextElement = document.getElementById('button-next');
 
-const h2Content = () => {
+const printClickPrevious = () => {
+  if (wordCounter <= 0) {
+  }
+  wordCounter--;
   h2Element.textContent = words[wordCounter];
 };
 
-const printClickPrevious = () => {
-  wordCounter = h2Content.words[wordCounter]++;
-};
-
 buttonPreviousElement.addEventListener('click', printClickPrevious);
-
-/* const h2Element = document.getElementById('subtitle');
-const h2Content = h2Element.textContent;
-
-const buttonPreviousElement = document.getElementById('button-previous');
-
-const previousOrNextWord = words => {
-  words.forEach(word => {
-    
-  });
-}
-
-for(let i = 0; i = words.length; i++) {
-
-}
-
-const printClickPrevious = () => {
-  h2Content = words[0] - words.length;
-};
-
-buttonPreviousElement.addEventListener('click', printClickPrevious);
-
-const buttonNextElement = document.getElementById('button-next');
 
 const printClickNext = () => {
-  h2Content = words[0] + 1;
+  wordCounter++;
+  h2Element.textContent = words[wordCounter];
 };
 
-buttonNextElement.addEventListener('click', printClickNext); */
+h2Element.textContent = words[0];
+
+buttonNextElement.addEventListener('click', printClickNext);
 
 //
 //
 //
 
 /* - Repite el mismo ejercicio pero esta vez desactiva el botón previous si estás en el primer elemento y el botón next si estás en el último */
+
+const previousText = () => {
+  wordCounter--;
+  buttonNextElement.disabled = false;
+
+  if (wordCounter === 0) buttonPreviousElement.disabled = true;
+
+  changeText();
+};
+
+const nextText = () => {
+  wordCounter++;
+  buttonPreviousElement.disabled = false;
+
+  if (wordCounter === words.length - 1) buttonNextElement.disabled = true;
+
+  changeText();
+};
+
+/* if (wordCounter >= 0 && wordCounter < words.length - 1) {
+  buttonPreviousElement.active;
+} else {
+  buttonPreviousElement.disabled;
+} */
 
 /* - Crea un input range con un label, al mover el input range deberá escribir en el label el valor del input range. */
 
@@ -197,16 +218,34 @@ const labelValue = () => {
 
 inputRangeElement.addEventListener('input', labelValue);
 
+// Se puede utilizar change en vez de input. Change enseña el valor cuando se suelta el input range
+
 //
 //
 //
 
 /* - Crea una lista de 4 checkbox con el texto que quieras y un botón, al pulsar el botón deberá decirte cuantos checkbox están marcados y cuál es su texto. */
 
-const checkboxButtonElement = document.getElementById('checkbox-button');
+// Resolución larga
 
+const inputsElements = document.querySelectorAll("input[type='checkbox']");
+const checkboxButtonElement = document.getElementById('checkbox-button');
+const checkboxInfoElement = document.getElementById('checkbox-info');
+
+// para saber cuáles están marcados
 const checkboxChecked = () => {
-  checkboxButtonElement.textContent = `Hay x checkbox marcados y son `;
+  let checkCounter = 0;
+  inputsElements.forEach(input => {
+    if (input.checked) {
+      console.log(input.value);
+      // para sumar cada vez que encuentra un checkbox marcado
+      checkCounter++;
+    }
+  });
+
+  console.log(`Hay ${checkCounter} checkbox marcados`);
 };
 
 checkboxButtonElement.addEventListener('click', checkboxChecked);
+
+// input:checked -> para seleccionar todos los inputs que estén marcados
